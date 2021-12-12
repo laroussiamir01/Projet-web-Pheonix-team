@@ -35,19 +35,19 @@ class ResetPasswords{
 
         if(empty($usersEmail)){
             flash("reset", "Please input email");
-            redirect("../reset-password.php");
+            redirect("../views/reset-password.php");
         }
 
         if(!filter_var($usersEmail, FILTER_VALIDATE_EMAIL)){
             flash("reset", "Invalid email");
-            redirect("../reset-password.php");
+            redirect("../views/reset-password.php");
         }
         //Will be used to query the user from the database
         $selector = bin2hex(random_bytes(8));
         //Will be used for confirmation once the database entry has been matched
         $token = random_bytes(32);
         //URL will vary depending on where the website is being hosted from
-        $url = 'http://localhost/project/user/create-new-password.php?selector='.$selector.'&validator='.bin2hex($token);
+        $url = 'http://localhost/project/user/views/create-new-password.php?selector='.$selector.'&validator='.bin2hex($token);
         //Expiration date will last for half an hour
         $expires = date("U") + 1800;
         if(!$this->resetModel->deleteEmail($usersEmail)){
@@ -72,7 +72,7 @@ class ResetPasswords{
         $this->mail->send();
 
         flash("reset", "Check your email", 'form-message form-message-green');
-        redirect("../reset-password.php");
+        redirect("../views/reset-password.php");
     }
 
     public function resetPassword(){
@@ -84,7 +84,7 @@ class ResetPasswords{
             'pwd' => trim($_POST['pwd']),
             'pwd-repeat' => trim($_POST['pwd-repeat'])
         ];
-        $url = '../create-new-password.php?selector='.$data['selector'].'&validator='.$data['validator'];
+        $url = '../views/create-new-password.php?selector='.$data['selector'].'&validator='.$data['validator'];
 
         if(empty($_POST['pwd'] || $_POST['pwd-repeat'])){
             flash("newReset", "Please fill out all fields");
@@ -144,8 +144,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $init->resetPassword();
             break;
         default:
-        header("location: ../index.php");
+        header("location: ../views/index.php");
     }
 }else{
-    header("location: ../index.php");
+    header("location: ../views/index.php");
 }
