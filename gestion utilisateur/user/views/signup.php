@@ -7,7 +7,7 @@
 
     <?php flash('register') ?>
 
-    <form method="post" action="./controllers/Users.php">
+    <form method="post" action="../controllers/Users.php">
         <input type="hidden" name="type" value="register">
         <input type="text" name="usersName" 
         placeholder="Full name...">
