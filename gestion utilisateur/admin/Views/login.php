@@ -42,10 +42,12 @@ if (isset($logout)) {
                 </div>
                 <div class="form-group">
                   <button type="submit" name="login" class="btn btn-success">Login</button>
+                  
                 </div>
 
 
             </form>
+            <div class="form-sub-msg"><a href="reset-password.php">Forgotten Password?</a></div>
           </div>
 
 

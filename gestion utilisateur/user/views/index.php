@@ -2,7 +2,7 @@
     include_once 'header.php'
 ?>
 
-    <p id="index-text"> <?php if(isset($_SESSION['usersId'])){
+    <p id="index-text"> <?php if(isset($_SESSION['id'])){
        
     }else{
        

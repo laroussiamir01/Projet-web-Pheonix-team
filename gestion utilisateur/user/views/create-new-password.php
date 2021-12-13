@@ -18,7 +18,7 @@
         <input type="hidden" name="type" value="reset" />
         <input type="hidden" name="selector" value="<?php echo $selector ?>" />
         <input type="hidden" name="validator" value="<?php echo $validator ?>" />
-        <input type="password" name="pwd" 
+        <input type="password" name="password" 
         placeholder="Enter a new password...">
         <input type="password" name="pwd-repeat" 
         placeholder="Repeat new password...">

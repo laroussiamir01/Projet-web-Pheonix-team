@@ -15,7 +15,7 @@
     <nav>
         <ul>
             <a href="index.php"><li>Home</li></a>
-            <?php if(!isset($_SESSION['usersId'])) : ?>
+            <?php if(!isset($_SESSION['id'])) : ?>
                 <a href="signup.php"><li>Sign Up</li></a>
                 <a href="login.php"><li>Login</li></a>
             <?php else: ?>

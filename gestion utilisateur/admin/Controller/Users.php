@@ -37,15 +37,13 @@ class Users{
     }
   }
 
-
-
   // User Registration Method
   public function userRegistration($data){
     $name = $data['name'];
     $username = $data['username'];
     $email = $data['email'];
     $mobile = $data['mobile'];
-    $roleid = $data['roleid'];
+    $roleid = 1;
     $password = $data['password'];
 
     $checkEmail = $this->checkExistEmail($email);
@@ -129,7 +127,7 @@ class Users{
     $username = $data['username'];
     $email = $data['email'];
     $mobile = $data['mobile'];
-    $roleid = $data['roleid'];
+    $roleid = 1;
     $password = $data['password'];
 
     $checkEmail = $this->checkExistEmail($email);

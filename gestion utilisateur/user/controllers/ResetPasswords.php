@@ -31,7 +31,7 @@ class ResetPasswords{
     public function sendEmail(){
         //Sanitize POST data
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        $usersEmail = trim($_POST['usersEmail']);
+        $usersEmail = trim($_POST['email']);
 
         if(empty($usersEmail)){
             flash("reset", "Please input email");
@@ -81,18 +81,18 @@ class ResetPasswords{
         $data = [
             'selector' => trim($_POST['selector']),
             'validator' => trim($_POST['validator']),
-            'pwd' => trim($_POST['pwd']),
+            'password' => trim($_POST['password']),
             'pwd-repeat' => trim($_POST['pwd-repeat'])
         ];
         $url = '../views/create-new-password.php?selector='.$data['selector'].'&validator='.$data['validator'];
 
-        if(empty($_POST['pwd'] || $_POST['pwd-repeat'])){
+        if(empty($_POST['password'] || $_POST['pwd-repeat'])){
             flash("newReset", "Please fill out all fields");
             redirect($url);
-        }else if($data['pwd'] != $data['pwd-repeat']){
+        }else if($data['password'] != $data['pwd-repeat']){
             flash("newReset", "Passwords do not match");
             redirect($url);
-        }else if(strlen($data['pwd']) < 6){
+        }else if(strlen($data['password']) < 6){
             flash("newReset", "Invalid password");
             redirect($url);
         }
@@ -116,7 +116,7 @@ class ResetPasswords{
             redirect($url);
         }
 
-        $newPwdHash = password_hash($data['pwd'], PASSWORD_DEFAULT);
+        $newPwdHash = password_hash($data['password'], PASSWORD_DEFAULT);
         if(!$this->userModel->resetPassword($newPwdHash, $tokenEmail)){
             flash("newReset", "There was an error");
             redirect($url);

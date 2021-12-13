@@ -9,13 +9,13 @@
 
     <form method="post" action="../controllers/Users.php">
         <input type="hidden" name="type" value="register">
-        <input type="text" name="usersName" 
+        <input type="text" name="name" 
         placeholder="Full name...">
-        <input type="text" name="usersEmail" 
+        <input type="text" name="email" 
         placeholder="Email...">
-        <input type="text" name="usersUid" 
+        <input type="text" name="username" 
         placeholder="Username...">
-        <input type="password" name="usersPwd" 
+        <input type="password" name="password" 
         placeholder="Password...">
         <input type="password" name="pwdRepeat" 
         placeholder="Repeat password">

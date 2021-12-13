@@ -11,7 +11,7 @@ class User {
 
     //Find user by email or username
     public function findUserByEmailOrUsername($email, $username){
-        $this->db->query('SELECT * FROM users WHERE usersUid = :username OR usersEmail = :email');
+        $this->db->query('SELECT * FROM tbl_users WHERE username = :username OR email = :email');
         $this->db->bind(':username', $username);
         $this->db->bind(':email', $email);
 
@@ -27,13 +27,14 @@ class User {
 
     //Register User
     public function register($data){
-        $this->db->query('INSERT INTO users (usersName, usersEmail, usersUid, usersPwd) 
-        VALUES (:name, :email, :Uid, :password)');
+        $this->db->query('INSERT INTO tbl_users (name, email, username, password, roleid) 
+        VALUES (:name, :email, :Uid, :password, :roleid)');
         //Bind values
-        $this->db->bind(':name', $data['usersName']);
-        $this->db->bind(':email', $data['usersEmail']);
-        $this->db->bind(':Uid', $data['usersUid']);
-        $this->db->bind(':password', $data['usersPwd']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':Uid', $data['username']);
+        $this->db->bind(':password', $data['password']);
+        $this->db->bind(':roleid', 3);
 
         //Execute
         if($this->db->execute()){
@@ -49,7 +50,7 @@ class User {
 
         if($row == false) return false;
 
-        $hashedPassword = $row->usersPwd;
+        $hashedPassword = $row->password;
         if(password_verify($password, $hashedPassword)){
             return $row;
         }else{
@@ -59,7 +60,7 @@ class User {
 
     //Reset Password
     public function resetPassword($newPwdHash, $tokenEmail){
-        $this->db->query('UPDATE users SET usersPwd=:pwd WHERE usersEmail=:email');
+        $this->db->query('UPDATE tbl_users SET password=:pwd WHERE email=:email');
         $this->db->bind(':pwd', $newPwdHash);
         $this->db->bind(':email', $tokenEmail);
 
